@@ -1,21 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
+const db = require('./routes/services')
 const PORT = 3000
-
-const Pool = require('pg').Pool
-const pool = new Pool({
-  user: 'mklfzixy',
-  host: '128.214.253.167',
-  database: 'mklfzixy',
-  password: 'c7e93b21b9fd332d66a0',
-  port: 5432,
-})
-
-pool.connect()
-
-
-
 
 app.use(bodyParser.json())
 app.use(
@@ -24,7 +11,17 @@ app.use(
   })
 )
 
+app.get('/', (request, response) => {
+  response.json({ info: 'Node.js, Express, and Postgres API' })
+})
+
 app.use(express.json())
+
+app.get('/services', db.getServices)
+app.post('/services', db.postServices)
+/*app.patch('/services/:id', db.patchServices)
+app.delete('/services/:id', db.deleteServices)*/
+
 
 
 app.listen(PORT, () => {
