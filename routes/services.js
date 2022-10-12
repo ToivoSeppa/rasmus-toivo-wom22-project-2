@@ -25,12 +25,12 @@ pool.connect((err, client, release) => {
 
 const getServices = async (request, response) => {
     
-    const text = 'SELECT * FROM services ORDER BY id ASC'
+    const text = 'SELECT * FROM services'
 
     try {
         const res = await pool.query(text)
-        console.log(res)
-        //res.status(200).json(res.rows)
+        //console.log(res)
+        response.status(200).json(res.rows)
     } catch (error) {
         console.log(error.message)
     }
@@ -45,8 +45,9 @@ const postServices = async (request, response) => {
 
     try {
         const res = await pool.query(text, values)
-        console.log(res)
-        //res.status(201).send(`User added with ID: ${res.rows[0].id}`)
+        //console.log(res)
+        response.status(201).send(`User added with ID: ${res.rows[0].id}`)
+        
     } catch (error) {
         console.log(error.message)
     }
