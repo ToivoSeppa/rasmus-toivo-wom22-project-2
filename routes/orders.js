@@ -23,9 +23,9 @@ pool.connect((err, client, release) => {
 })
   
 
-const getServices = async (request, response) => {
+const getOrders = async (request, response) => {
     
-    const text = 'SELECT * FROM services ORDER BY id ASC'
+    const text = 'SELECT * FROM orders ORDER BY id ASC'
 
     try {
         const res = await pool.query(text)
@@ -37,36 +37,36 @@ const getServices = async (request, response) => {
 }
 
 
-const postServices = async (request, response) => {
-    const { servicetype, price } = request.body
+const postOrders = async (request, response) => {
+    const { date, cabin, servicetype } = request.body
 
-    const text = 'INSERT INTO services(servicetype, price) VALUES($1, $2) RETURNING *'
-    const values = [servicetype, price]
+    const text = 'INSERT INTO orders(date, cabin, servicetype) VALUES($1, $2, $3) RETURNING *'
+    const values = [date, cabin, servicetype]
 
     try {
         const res = await pool.query(text, values)
         //console.log(res)
-        response.status(201).send(`Service added with ID: ${res.rows[0].id}`)
+        response.status(201).send(`Order added with ID: ${res.rows[0].id}`)
         
     } catch (error) {
         console.log(error.message)
     }
 }
 
-const patchServices = async (request, response) => {
+const patchOrders = async (request, response) => {
   const id = request.params.id
 
   console.log(request.body)
 
-  const { servicetype, price } = request.body
+  const { date, cabin, servicetype } = request.body
 
-  const values = [servicetype, price, id]
-  const text = 'UPDATE services SET servicetype = $1, price = $2 WHERE id = $3'
+  const values = [date, cabin, servicetype, id]
+  const text = 'UPDATE orders SET date = $1, cabin = $2, servicetype = $3 WHERE id = $4'
 
   try {
     const res = await pool.query(text, values)
     //console.log(res)
-    response.status(200).send(`Service modified with ID: ${id}`)
+    response.status(200).send(`Order modified with ID: ${id}`)
   } catch (error) {
     console.log(error.message)
   }
@@ -74,21 +74,21 @@ const patchServices = async (request, response) => {
   
 }
 
-const deleteServices = async (request, response) => {
+const deleteOrders = async (request, response) => {
   const id = request.params.id
 
   try {
-    const res = await pool.query('DELETE FROM services WHERE id = $1', [id])
+    const res = await pool.query('DELETE FROM orders WHERE id = $1', [id])
     console.log(res);
-    response.status(200).send(`Service deleted with ID: ${id}`)
+    response.status(200).send(`Order deleted with ID: ${id}`)
   } catch (error) {
     
   }
 }
 
 module.exports = {
-    getServices,
-    postServices,
-    patchServices,
-    deleteServices,
+    getOrders,
+    postOrders,
+    patchOrders,
+    deleteOrders,
   }

@@ -10,6 +10,20 @@ POST {{baseURL}}/services
 Content-Type: application/json
 
 {
-    "servicetype": "Chimney sotning",
+    "servicetype": "Food delivery2",
     "price": 30
 }
+
+###
+
+PATCH {{baseURL}}/services/1
+Content-Type: application/json
+
+{
+    "servicetype": "Chimney cleaning",
+    "price": 30
+}
+
+###
+
+DELETE {{baseURL}}/services/4
