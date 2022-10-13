@@ -82,7 +82,7 @@ const deleteServices = async (request, response) => {
     console.log(res);
     response.status(200).send(`Service deleted with ID: ${id}`)
   } catch (error) {
-    
+    console.log(error.message)
   }
 }
 

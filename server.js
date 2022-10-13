@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const dbServices = require('./routes/services')
 const dbOrders = require('./routes/orders')
+const dbCabins = require('./routes/cabins')
 const PORT = 3000
 
 app.use(bodyParser.json())
@@ -27,6 +28,8 @@ app.get('/orders', dbOrders.getOrders)
 app.post('/orders', dbOrders.postOrders)
 app.patch('/orders/:id', dbOrders.patchOrders)
 app.delete('/orders/:id', dbOrders.deleteOrders)
+
+app.get('/cabins/owned', dbCabins.getCabins)
 
 
 
