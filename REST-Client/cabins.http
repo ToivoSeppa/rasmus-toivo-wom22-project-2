@@ -2,4 +2,4 @@
 
 ###
 
-GET {{baseURL}}/cabins/owned
+GET {{baseURL}}/cabins

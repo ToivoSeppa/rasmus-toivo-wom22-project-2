@@ -29,7 +29,7 @@ app.post('/orders', dbOrders.postOrders)
 app.patch('/orders/:id', dbOrders.patchOrders)
 app.delete('/orders/:id', dbOrders.deleteOrders)
 
-app.get('/cabins/owned', dbCabins.getCabins)
+app.get('/cabins', dbCabins.getCabins)
 
 
 
