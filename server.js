@@ -19,6 +19,8 @@ app.get('/', (request, response) => {
 
 app.use(express.json())
 
+app.use('/static', express.static(__dirname + '/public'))
+
 app.get('/services', dbServices.getServices)
 app.post('/services', dbServices.postServices)
 app.patch('/services/:id', dbServices.patchServices)
