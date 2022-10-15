@@ -10,8 +10,8 @@ POST {{baseURL}}/services
 Content-Type: application/json
 
 {
-    "servicetype": "Chimney cleaning",
-    "price": 100
+    "servicetype": "Cleaning",
+    "price": 40
 }
 
 ###
@@ -26,4 +26,4 @@ Content-Type: application/json
 
 ###
 
-DELETE {{baseURL}}/services/4
+DELETE {{baseURL}}/services/7

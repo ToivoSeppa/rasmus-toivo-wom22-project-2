@@ -7,19 +7,31 @@ const getCabins = async (request, response) => {
 
     console.log("Kör den?")
 
-    try {
-        const data = await axios.get(url, {
-            headers: {
-                'Authorization': `Bearer ` + jwt
-            }
-        })
-        console.log(data)
-        response.status(200).json(data.rows)
-    } catch (error) {
-        console.log(error)
-    }
-}
+    /*axios.get(url, {
+        headers: {
+            'authorization': `Bearer ${jwt}`
+        }
+    })
+    .then((res) => {
+        console.log(res.data)
+        response.status(200).json(res.data)
+    })
+    .catch((error) => {
+        console.error(error)
+    })*/
 
+    var options = {
+        method: 'GET',
+    }
+    fetch(url, options)
+        .then(function (res) {
+            return res.json()
+        })
+        .then(function (resJson) {
+            response.status(200).json(resJson)
+        })
+
+}
 module.exports = {
     getCabins
-  }
+}
