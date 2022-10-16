@@ -4,7 +4,7 @@ const app = express()
 const dbServices = require('./routes/services')
 const dbOrders = require('./routes/orders')
 const dbCabins = require('./routes/cabins')
-const PORT = 3000
+const PORT = process.env.PORT || 3030
 
 app.use(bodyParser.json())
 app.use(
