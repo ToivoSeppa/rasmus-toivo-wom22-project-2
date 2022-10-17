@@ -46,7 +46,7 @@ const postOrders = async (request, response) => {
     try {
         const res = await pool.query(text, values)
         //console.log(res)
-        response.status(201).send(`Order added with ID: ${res.rows[0].id}`)
+        response.status(201).json(res.rows)
         
     } catch (error) {
         console.log(error.message)
@@ -66,7 +66,7 @@ const patchOrders = async (request, response) => {
   try {
     const res = await pool.query(text, values)
     //console.log(res)
-    response.status(200).send(`Order modified with ID: ${id}`)
+    response.status(200).json(res.rows)
   } catch (error) {
     console.log(error.message)
   }
@@ -79,8 +79,8 @@ const deleteOrders = async (request, response) => {
 
   try {
     const res = await pool.query('DELETE FROM orders WHERE id = $1', [id])
-    console.log(res);
-    response.status(200).send(`Order deleted with ID: ${id}`)
+    console.log(res)
+    response.status(200).json(res.rows)
   } catch (error) {
     
   }

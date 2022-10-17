@@ -46,7 +46,7 @@ const postServices = async (request, response) => {
     try {
         const res = await pool.query(text, values)
         //console.log(res)
-        response.status(201).send(`Service added with ID: ${res.rows[0].id}`)
+        response.status(201).json(res.rows)
         
     } catch (error) {
         console.log(error.message)
@@ -66,7 +66,7 @@ const patchServices = async (request, response) => {
   try {
     const res = await pool.query(text, values)
     //console.log(res)
-    response.status(200).send(`Service modified with ID: ${id}`)
+    response.status(200).json(res.rows)
   } catch (error) {
     console.log(error.message)
   }
@@ -80,7 +80,7 @@ const deleteServices = async (request, response) => {
   try {
     const res = await pool.query('DELETE FROM services WHERE id = $1', [id])
     console.log(res);
-    response.status(200).send(`Service deleted with ID: ${id}`)
+    response.status(200).json(res.rows)
   } catch (error) {
     console.log(error.message)
   }
